@@ -1,0 +1,2 @@
+// Shared Badge placeholder.
+export {};
