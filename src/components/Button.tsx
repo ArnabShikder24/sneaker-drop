@@ -1,7 +1,7 @@
-import { motion } from 'framer-motion';
-import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import { motion, type HTMLMotionProps } from 'framer-motion';
+import type { ReactNode } from 'react';
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends HTMLMotionProps<'button'> {
   variant?: 'primary' | 'secondary' | 'danger' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
   isLoading?: boolean;
@@ -63,7 +63,7 @@ export function Button({
         ${className}
       `}
       disabled={disabled || isLoading}
-      {...(props as React.ComponentProps<typeof motion.button>)}
+      {...props}
     >
       {isLoading && <Spinner />}
       {children}
