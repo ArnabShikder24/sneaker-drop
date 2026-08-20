@@ -30,9 +30,16 @@ export function useSocket() {
       console.log('[Socket] Disconnected');
     });
 
-    // Core real-time handler: stock changed → update store → all DropCards re-render
+    // Core real-time handler: stock changed → always patch store immediately (instant UI update)
+    // On 'purchase': also refetch drops to update the activity feed on every tab
     socket.on(SOCKET_EVENTS.STOCK_UPDATED, (payload: StockUpdatedPayload) => {
       updateStockForDrop(payload.dropId, payload.availableStock);
+
+      if (payload.reason === 'purchase') {
+        // A purchase just completed somewhere — refresh drops so the activity feed
+        // (recent_purchasers) is up to date on every connected tab
+        fetchDrops().then(setDrops).catch(console.error);
+      }
     });
 
     // Reservation expired on the server → remove from client state + refetch to

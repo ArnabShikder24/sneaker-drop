@@ -13,6 +13,8 @@ export interface ApiError {
 export interface StockUpdatedPayload {
   dropId: number;
   availableStock: number;
+  /** Why the stock changed — 'purchase' means activity feed needs refreshing */
+  reason: 'reserve' | 'expire' | 'purchase';
 }
 
 export interface ReservationExpiredPayload {
