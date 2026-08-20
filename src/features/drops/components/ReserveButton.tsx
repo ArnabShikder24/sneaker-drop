@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Button } from '../../../components/Button';
 import { useReserve } from '../hooks/useReserve';
 import { useCountdown } from '../hooks/useCountdown';
